@@ -1,4 +1,12 @@
-let weather = {
+const city = document.querySelector(".city") ;
+const icon = document.querySelector(".icon");
+const description = document.querySelector(".description"); 
+const temperature = document.querySelector(".temp");
+const humid = document.querySelector(".humidity"); 
+const wind = document.querySelector(".wind");
+const weather = document.querySelector(".weather");
+
+let weatherApp = {
     apiKey: "1dbc1c79e001bf751501e79786b6afad",
     fetchWeather: function (city) {
       fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + this.apiKey)
@@ -16,13 +24,13 @@ let weather = {
       const { icon, description } = data.weather[0];
       const { temp, humidity } = data.main;
       const { speed } = data.wind;
-      document.querySelector(".city").innerText = "Weather in " + name;
-      document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
-      document.querySelector(".description").innerText = description;
-      document.querySelector(".temp").innerText = temp + "°C";
-      document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
-      document.querySelector(".wind").innerText = "Wind speed: " + speed + " km/h";
-      document.querySelector(".weather").classList.remove("loading");
+      city.innerText = "Weather in " + name;
+      icon.src = "https://openweathermap.org/img/wn/" + icon + ".png";
+      description.innerText = description;
+      temperature.innerText = temp + "°C";
+      humid.innerText = "Humidity: " + humidity + "%";
+      wind.innerText = "Wind speed: " + speed + " km/h";
+      weather.classList.remove("loading");
       document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
     },
     search: function () {
@@ -31,13 +39,13 @@ let weather = {
   };
   
   document.querySelector(".search button").addEventListener("click", function () {
-    weather.search();
+    weatherApp.search();
   });
   
   document.querySelector(".search-box").addEventListener("keyup", function (event) {
       if (event.key == "Enter") {
-        weather.search();
+        weatherApp.search();
       }
     });
   
-  weather.fetchWeather("Abeokuta");
+  weatherApp.fetchWeather("Abeokuta");
